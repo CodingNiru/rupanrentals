@@ -5,18 +5,21 @@ const bookingOptions = [
 	{
 		name: "Book direct",
 		image: "/images/booking/sol-searching.png",
+		optimized: "/images/optimized/booking/sol-searching-480.webp",
 		href: "https://solsearchingproperties.com/beach-please/",
 		description: "Book Beach Please directly with Sol Searching Properties.",
 	},
 	{
 		name: "Book on Vrbo",
 		image: "/images/booking/vrbo.webp",
+		optimized: "/images/optimized/booking/vrbo-480.webp",
 		href: "https://vrbo.onelink.me/ItNz/zf75e0q5",
 		description: "View Beach Please on Vrbo.",
 	},
 	{
 		name: "Book on Airbnb",
 		image: "/images/booking/airbnb.png",
+		optimized: "/images/optimized/booking/airbnb-480.webp",
 		href: "https://www.airbnb.com/rooms/1524616373207688190",
 		description: "View Beach Please on Airbnb.",
 	},
@@ -32,16 +35,19 @@ const bookingOptions = [
 		<div class="site-width">
 			<p class="eyebrow">Your beach getaway is waiting</p>
 			<h1>Book your stay</h1>
-			<p>Choose the option that works best for you. Booking takes place securely on the provider's website.</p>
+			<p>Choose a provider to continue to its booking page.</p>
 		</div>
 	</section>
 
 	<section class="site-width booking-section">
 		<div class="booking-grid">
 			{bookingOptions.map((option, index) => (
-				<a class:list={["booking-card", { featured: index === 0 }]} href={option.href} target="_blank" rel="noreferrer">
+				<a class:list={["booking-card", { featured: index === 0 }]} href={option.href} target="_blank" rel="noreferrer noopener">
 					<div class="booking-logo">
-						<img src={option.image} alt="" loading="lazy" />
+						<picture>
+							<source srcset={option.optimized} type="image/webp" />
+							<img src={option.image} alt="" loading="lazy" decoding="async" />
+						</picture>
 					</div>
 					<h2>{option.name}</h2>
 					<p>{option.description}</p>
@@ -66,7 +72,7 @@ const bookingOptions = [
 <style>
 	.eyebrow {
 		margin: 0 0 10px;
-		color: #267c82;
+		color: var(--accent);
 		font-size: 0.78rem;
 		font-weight: 800;
 		letter-spacing: 0.13em;
@@ -94,7 +100,7 @@ const bookingOptions = [
 	.page-heading > div > p:last-child {
 		max-width: 580px;
 		margin: 15px auto 0;
-		color: #58717a;
+		color: var(--muted);
 		line-height: 1.7;
 	}
 
@@ -147,6 +153,12 @@ const bookingOptions = [
 		max-width: 200px;
 		max-height: 140px;
 		object-fit: contain;
+	}
+
+	.booking-logo picture {
+		display: grid;
+		height: 100%;
+		place-items: center;
 	}
 
 	.booking-card h2 {

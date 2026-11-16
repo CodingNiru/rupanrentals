@@ -4,75 +4,92 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 const highlights = [
 	{
 		image: "/images/home/living-room.png",
+		optimized: "/images/optimized/home/living-room",
 		alt: "Bright living room with comfortable seating",
-		title: "A place to settle in",
-		text: "Come in to a bright, airy living space with comfortable furnishings and plenty of natural light. The fully equipped kitchen has the essentials for easy meals together.",
-	},
-	{
-		image: "/images/home/exterior.jpg",
-		alt: "The Beach Please home in North Topsail Beach",
-		title: "A coastal home base",
-		text: "Enjoy a relaxed stay in beautiful North Topsail Beach, with room for family and friends and the coast close by.",
+		title: "Living room and kitchen",
+		text: "The bright living space has comfortable furnishings and natural light. The fully equipped kitchen includes modern appliances, cookware, and dishes.",
 	},
 	{
 		image: "/images/home/bedroom.jpg",
-		alt: "One of the home's spacious bedrooms",
-		title: "Room for everyone",
-		text: "Four spacious bedrooms offer comfortable beds and ample storage. Each bedroom has its own TV, and two full bathrooms make group stays easy.",
+		optimized: "/images/optimized/home/bedroom",
+		alt: "One of the home's bedrooms",
+		title: "Four bedrooms",
+		text: "The home has four spacious bedrooms with comfortable beds, storage, and a TV in each bedroom. There are also two full bathrooms.",
 	},
 	{
 		image: "/images/home/upstairs-living.jpg",
-		alt: "Upstairs living space with room to relax",
-		title: "Make time for fun",
-		text: "The upstairs living room is ready for games, movie nights, and slow afternoons, with a foosball table, a daybed, and a large flat-screen TV.",
+		optimized: "/images/optimized/home/upstairs-living",
+		alt: "Upstairs living room with seating",
+		title: "Upstairs living room",
+		text: "The upstairs living room has a foosball table, a daybed, and a large flat-screen TV for relaxing or spending time together.",
 	},
 	{
 		image: "/images/home/sound-view.jpg",
-		alt: "View across the water from the upper deck",
-		title: "Take in the views",
-		text: "Step onto the deck for ocean breezes and beautiful water views. When it is time for the beach, grab the provided chairs, umbrellas, and toys.",
-	},
-	{
-		image: "/images/home/balcony.jpg",
-		alt: "Coastal view from the home's balcony",
-		title: "Slow down on the deck",
-		text: "Enjoy a morning coffee, watch the sky change, or unwind in the sea breeze on the home's oceanfront balcony.",
+		optimized: "/images/optimized/home/sound-view",
+		alt: "Water view from the upper deck",
+		title: "Deck and beach views",
+		text: "Take in the water views and sea breeze from the oceanfront balcony. The beach is a short walk away; beach chairs, umbrellas, and toys are provided.",
 	},
 ];
 ---
 
 <SiteLayout
 	title="Welcome to Beach Please"
-	description="A spacious oceanfront vacation rental in North Topsail Beach, North Carolina, with four bedrooms, a beach-view deck, and room for the whole family."
+	description="Explore the Beach Please vacation rental in North Topsail Beach: four bedrooms, two full bathrooms, an upstairs living room, and a short walk to the beach."
 	activePage="home"
 >
 	<section class="hero">
-		<img class="hero-image" src="/images/gallery/29-House-Front.jpg" alt="Beach Please vacation home in North Topsail Beach" fetchpriority="high" />
+		<picture class="hero-picture">
+			<source
+				srcset="/images/optimized/gallery/29-House-Front-480.webp 480w, /images/optimized/gallery/29-House-Front-960.webp 960w"
+				sizes="100vw"
+				type="image/webp"
+			/>
+			<img
+				class="hero-image"
+				src="/images/gallery/29-House-Front.jpg"
+				alt="Beach Please vacation home in North Topsail Beach"
+				fetchpriority="high"
+			/>
+		</picture>
 		<div class="hero-shade"></div>
 		<div class="hero-copy site-width">
 			<p class="eyebrow">North Topsail Beach, North Carolina</p>
 			<h1>Welcome to <span>Beach Please</span></h1>
 			<p>Experience the best of both worlds with stunning beach and sound views.</p>
-			<a class="button button-coral" href="/book-now/">Plan your beach escape <span aria-hidden="true">→</span></a>
+			<a class="button button-coral" href="/book-now/">View booking options <span aria-hidden="true">→</span></a>
 		</div>
 	</section>
 
+	<section class="quick-facts site-width" aria-label="Rental highlights">
+		<ul>
+			<li><strong>4</strong><span>bedrooms</span></li>
+			<li><strong>2</strong><span>full bathrooms</span></li>
+			<li><strong>Short walk</strong><span>to the beach</span></li>
+		</ul>
+	</section>
+
 	<section class="intro site-width">
-		<div class="intro-mark" aria-hidden="true">☼</div>
 		<p class="eyebrow">Your coastal getaway</p>
 		<h2>Make yourself at home by the water</h2>
-		<p class="intro-text">
-			Welcome to our short-term rental in beautiful North Topsail Beach. With room for family and friends, a relaxed coastal setting, and the beach just a short walk away, it is a lovely place to slow down and make memories.
+		<p>
+			Welcome to our short-term rental in beautiful North Topsail Beach. The home has space for family and friends, and the beach is just a short walk away.
 		</p>
 	</section>
 
 	<section class="highlights site-width" aria-label="About the home">
-		{highlights.map((highlight, index) => (
-			<article class:list={["highlight", { reverse: index % 2 === 1 }]}>
-				<img src={highlight.image} alt={highlight.alt} loading="lazy" />
+		{highlights.map((highlight) => (
+			<article class="highlight">
+				<picture class="highlight-image">
+					<source
+						srcset={`${highlight.optimized}-480.webp 480w, ${highlight.optimized}-720.webp 720w`}
+						sizes="(max-width: 700px) calc(100vw - 32px), 540px"
+						type="image/webp"
+					/>
+					<img src={highlight.image} alt={highlight.alt} width="960" height="600" loading="lazy" decoding="async" />
+				</picture>
 				<div class="highlight-copy">
-					<p class="eyebrow">Beach Please</p>
-					<h2>{highlight.title}</h2>
+					<h3>{highlight.title}</h3>
 					<p>{highlight.text}</p>
 				</div>
 			</article>
@@ -82,10 +99,13 @@ const highlights = [
 	<section class="home-cta">
 		<div class="site-width cta-inner">
 			<div>
-				<p class="eyebrow">Your next beach trip starts here</p>
-				<h2>Ready to make yourself at home?</h2>
+				<p class="eyebrow">Explore the home</p>
+				<h2>See more photos or choose a booking option.</h2>
 			</div>
-			<a class="button button-light" href="/book-now/">Explore booking options <span aria-hidden="true">→</span></a>
+			<div class="cta-actions">
+				<a class="button button-outline" href="/gallery/">Browse the gallery</a>
+				<a class="button button-light" href="/book-now/">Book your stay <span aria-hidden="true">→</span></a>
+			</div>
 		</div>
 	</section>
 </SiteLayout>
@@ -94,15 +114,14 @@ const highlights = [
 	.hero {
 		position: relative;
 		display: grid;
-		min-height: min(620px, 72vw);
-		min-height: min(620px, 72svh);
+		min-height: min(660px, 72svh);
 		overflow: hidden;
 		align-items: center;
 		background: #356477;
 		color: white;
 	}
 
-	.hero-image,
+	.hero-picture,
 	.hero-shade {
 		position: absolute;
 		inset: 0;
@@ -110,13 +129,15 @@ const highlights = [
 		height: 100%;
 	}
 
-	.hero-image {
+	.hero-picture img {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 		object-position: center 57%;
 	}
 
 	.hero-shade {
-		background: linear-gradient(90deg, rgb(9 39 52 / 78%), rgb(9 39 52 / 12%));
+		background: linear-gradient(90deg, rgb(9 39 52 / 80%), rgb(9 39 52 / 17%));
 	}
 
 	.hero-copy {
@@ -126,7 +147,7 @@ const highlights = [
 
 	.eyebrow {
 		margin: 0 0 12px;
-		color: #267c82;
+		color: var(--accent);
 		font-size: 0.78rem;
 		font-weight: 800;
 		letter-spacing: 0.13em;
@@ -134,11 +155,12 @@ const highlights = [
 	}
 
 	.hero .eyebrow {
-		color: #baf0e4;
+		color: #c8f4e9;
 	}
 
 	h1,
-	h2 {
+	h2,
+	h3 {
 		font-family: Georgia, "Times New Roman", serif;
 		font-weight: 500;
 	}
@@ -146,7 +168,7 @@ const highlights = [
 	h1 {
 		max-width: 1080px;
 		margin: 0;
-		font-size: clamp(3rem, 6vw, 5.4rem);
+		font-size: clamp(2.8rem, 6vw, 5.4rem);
 		line-height: 1.03;
 	}
 
@@ -186,20 +208,54 @@ const highlights = [
 		color: #292b2d;
 	}
 
-	.intro {
-		max-width: 800px;
-		padding-block: 86px 74px;
+	.quick-facts {
+		position: relative;
+		z-index: 1;
+		margin-top: -28px;
+	}
+
+	.quick-facts ul {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		margin: 0;
+		padding: 22px 30px;
+		border-radius: 18px;
+		background: white;
+		box-shadow: 0 12px 36px rgb(18 60 80 / 12%);
+		list-style: none;
+	}
+
+	.quick-facts li {
+		display: grid;
+		justify-items: center;
+		gap: 3px;
+		padding-inline: 12px;
 		text-align: center;
 	}
 
-	.intro-mark {
-		margin-bottom: 4px;
-		color: #e89c67;
-		font-size: 2.3rem;
+	.quick-facts li + li {
+		border-left: 1px solid #dfe9e6;
+	}
+
+	.quick-facts strong {
+		color: #163d4b;
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+		font-weight: 500;
+	}
+
+	.quick-facts span {
+		color: var(--muted);
+		font-size: 0.92rem;
+	}
+
+	.intro {
+		max-width: 800px;
+		padding-block: 78px 52px;
+		text-align: center;
 	}
 
 	.intro h2,
-	.highlight h2,
 	.home-cta h2 {
 		margin: 0;
 		color: #163d4b;
@@ -207,58 +263,65 @@ const highlights = [
 		line-height: 1.14;
 	}
 
-	.intro-text {
+	.intro > p:last-child {
 		max-width: 690px;
-		margin: 20px auto 0;
-		color: #56707a;
+		margin: 18px auto 0;
+		color: var(--muted);
 		font-size: 1.08rem;
 		line-height: 1.8;
 	}
 
 	.highlights {
 		display: grid;
-		gap: 38px;
-		padding-bottom: 82px;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+		padding-bottom: 76px;
 	}
 
 	.highlight {
-		display: grid;
-		min-height: 340px;
-		grid-template-columns: 1.05fr 0.95fr;
 		overflow: hidden;
-		align-items: center;
-		border-radius: 20px;
+		border: 1px solid #e3ece9;
+		border-radius: 18px;
 		background: white;
-		box-shadow: 0 12px 36px rgb(18 60 80 / 8%);
+		box-shadow: 0 10px 28px rgb(18 60 80 / 7%);
 	}
 
-	.highlight.reverse img {
-		order: 2;
+	.highlight-image {
+		display: block;
+		overflow: hidden;
+		aspect-ratio: 16 / 10;
+		background: #d9e8e5;
 	}
 
-	.highlight img {
+	.highlight-image img {
 		width: 100%;
 		height: 100%;
-		min-height: 340px;
 		object-fit: cover;
+		transition: transform 220ms ease;
+	}
+
+	.highlight:hover .highlight-image img {
+		transform: scale(1.025);
 	}
 
 	.highlight-copy {
-		padding: clamp(28px, 5vw, 62px);
+		padding: 22px 24px 26px;
 	}
 
-	.highlight h2 {
-		font-size: clamp(1.8rem, 3vw, 2.7rem);
+	.highlight h3 {
+		margin: 0;
+		color: #163d4b;
+		font-size: 1.5rem;
 	}
 
-	.highlight-copy > p:last-child {
-		margin: 16px 0 0;
-		color: #58717a;
-		line-height: 1.8;
+	.highlight-copy p {
+		margin: 10px 0 0;
+		color: var(--muted);
+		line-height: 1.7;
 	}
 
 	.home-cta {
-		padding-block: 52px;
+		padding-block: 48px;
 		background: #d9f1eb;
 	}
 
@@ -270,7 +333,14 @@ const highlights = [
 	}
 
 	.home-cta h2 {
-		font-size: clamp(1.9rem, 4vw, 2.7rem);
+		max-width: 620px;
+		font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+	}
+
+	.cta-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
 	}
 
 	.button-light {
@@ -279,44 +349,67 @@ const highlights = [
 		color: white;
 	}
 
+	.button-outline {
+		border: 2px solid #123c50;
+		background: transparent;
+		color: #123c50;
+	}
+
 	@media (max-width: 700px) {
 		.hero {
-			min-height: 580px;
+			min-height: 560px;
 		}
 
 		.hero-shade {
-			background: linear-gradient(90deg, rgb(9 39 52 / 76%), rgb(9 39 52 / 27%));
+			background: linear-gradient(90deg, rgb(9 39 52 / 82%), rgb(9 39 52 / 30%));
+		}
+
+		.quick-facts {
+			margin-top: -20px;
+		}
+
+		.quick-facts ul {
+			padding: 18px 10px;
+		}
+
+		.quick-facts li {
+			padding-inline: 5px;
+		}
+
+		.quick-facts span {
+			font-size: 0.82rem;
 		}
 
 		.intro {
-			padding-block: 62px 52px;
+			padding-block: 62px 38px;
 		}
 
 		.highlights {
-			gap: 22px;
+			grid-template-columns: 1fr;
+			gap: 18px;
 			padding-bottom: 56px;
 		}
 
-		.highlight {
-			grid-template-columns: 1fr;
-		}
-
-		.highlight.reverse img {
-			order: initial;
-		}
-
-		.highlight img {
-			height: 245px;
-			min-height: 0;
-		}
-
 		.highlight-copy {
-			padding: 28px;
+			padding: 20px;
 		}
 
 		.cta-inner {
 			align-items: flex-start;
 			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 390px) {
+		.quick-facts ul {
+			grid-template-columns: 1fr;
+			gap: 12px;
+		}
+
+		.quick-facts li + li {
+			border-top: 1px solid #dfe9e6;
+			border-left: 0;
+			padding-top: 12px;
 		}
 	}
 </style>

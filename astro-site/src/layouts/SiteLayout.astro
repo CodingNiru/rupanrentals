@@ -30,18 +30,21 @@ const navigation = [
 			<div class="site-width contact-strip-inner">
 				<div class="contact-shortcuts">
 					<a href="mailto:beachplease7508@gmail.com">beachplease7508@gmail.com</a>
-					<a href="tel:+19193071862">919-307-1862</a>
+					<a href="tel:+19195782338">919-578-2338</a>
 				</div>
 				<div class="social-links">
-					<a href="https://www.facebook.com/profile.php?id=100089334288452" target="_blank" rel="noreferrer">Facebook <span aria-hidden="true">↗</span></a>
-					<a href="https://www.instagram.com/beachplease_topsailnc/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+					<a href="https://www.facebook.com/profile.php?id=100089334288452" target="_blank" rel="noreferrer noopener">Facebook <span aria-hidden="true">↗</span></a>
+					<a href="https://www.instagram.com/beachplease_topsailnc/" target="_blank" rel="noreferrer noopener">Instagram <span aria-hidden="true">↗</span></a>
 				</div>
 			</div>
 		</div>
 		<header class="site-header">
 			<div class="site-width header-inner">
-				<a class="brand" href="/" aria-label="Beach Please home">
-					<img src="/images/logo.png" alt="" width="159" height="107" />
+				<a class="brand" href="/">
+					<picture>
+						<source srcset="/images/optimized/logo.webp" type="image/webp" />
+						<img src="/images/logo.png" alt="" width="159" height="107" />
+					</picture>
 					<span class="brand-copy">
 						<strong>Beach Please</strong>
 						<span>North Topsail Beach, North Carolina</span>
@@ -86,6 +89,7 @@ const navigation = [
 		--sea-glass: #d9f1eb;
 		--sand: #fff8ec;
 		--coral: #e85c76;
+		--accent: #155b60;
 		--muted: #58717a;
 	}
 
@@ -100,6 +104,12 @@ const navigation = [
 
 	a {
 		color: inherit;
+	}
+
+	a:focus-visible,
+	button:focus-visible {
+		outline: 3px solid var(--coral);
+		outline-offset: 3px;
 	}
 
 	img {
@@ -266,6 +276,15 @@ const navigation = [
 		color: #b7cbd2;
 	}
 
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			scroll-behavior: auto !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+
 	@media (max-width: 760px) {
 		.site-width {
 			width: min(100% - 32px, 560px);
@@ -294,6 +313,10 @@ const navigation = [
 		.brand img {
 			width: 80px;
 			height: 55px;
+		}
+
+		.brand picture {
+			display: block;
 		}
 
 		.brand-copy strong {

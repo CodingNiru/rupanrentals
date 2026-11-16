@@ -14,7 +14,7 @@ Astro serves the site at `http://localhost:4321` by default.
 ## Pages
 
 - `/` — home and rental highlights
-- `/gallery/` — locally stored property photos and the original video tour
+- `/gallery/` — locally stored property photos with full-size image links
 - `/book-now/` — direct, Vrbo, and Airbnb booking links
 - `/contact-us/` — email, phone, and social links
 
