@@ -1,0 +1,221 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const photos = [
+	"1-Family-Rm-2nd-floor.jpg",
+	"2-Living-Rm-1.jpg",
+	"3-Kitchen-Dining.jpg",
+	"4-Living-Rm-2.jpg",
+	"5-Living-Rm-3.jpg",
+	"6-Kitchen-2.jpg",
+	"7-Laundry.jpg",
+	"8-Bedroom-1.jpg",
+	"9-Bedroom-1-B.jpg",
+	"10-Bathroom-1-A.jpg",
+	"11-Beach-view-from-upper-deck.jpg",
+	"12-Sound-view-from-upper-deck.jpg",
+	"13-Beach-View.jpg",
+	"14-Sound-view.jpg",
+	"15-Bedroom-2.jpg",
+	"16-Bedroom-2-A.jpg",
+	"17-Bedroom-3.jpg",
+	"18-Bedroom-3-A.jpg",
+	"19-Bedroom-3-B.jpg",
+	"20-Bathroom-3.jpg",
+	"21-Family-Rm-2.jpg",
+	"22-Bathroom-2.jpg",
+	"23-Family-Rm-3.jpg",
+	"24-Bedroom-4.jpg",
+	"25-Bedroom-4-A.jpg",
+	"26-Bathroom-4.jpg",
+	"27-Underneath-house.jpg",
+	"28-Outdoor-Shower.jpg",
+	"29-House-Front.jpg",
+	"IMG_0847.jpg",
+].map((filename) => ({
+	src: `/images/gallery/${filename}`,
+	alt: filename.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
+}));
+---
+
+<SiteLayout
+	title="Gallery"
+	description="Browse photos of Beach Please, the vacation home, rooms, decks, and beach views in North Topsail Beach."
+	activePage="gallery"
+>
+	<section class="page-heading">
+		<div class="site-width">
+			<p class="eyebrow">A closer look</p>
+			<h1>Gallery</h1>
+			<p>Find your favorite corner of Beach Please, from laid-back living spaces to wide-open coastal views.</p>
+		</div>
+	</section>
+
+	<section class="site-width gallery-content">
+		<div class="photo-grid">
+			{photos.map((photo) => (
+				<a class="photo-card" href={photo.src} target="_blank" rel="noreferrer" aria-label={`View ${photo.alt} photo in a new tab`}>
+					<img src={photo.src} alt={photo.alt} loading="lazy" />
+					<span>{photo.alt}</span>
+				</a>
+			))}
+		</div>
+
+		<div class="video-card">
+			<div>
+				<p class="eyebrow">See the beach for yourself</p>
+				<h2>Take a video tour</h2>
+				<p>Watch a little more of the North Topsail Beach experience.</p>
+			</div>
+			<div class="video-frame">
+				<iframe
+					src="https://www.youtube-nocookie.com/embed/Xc6yIL-8ZU4"
+					title="Beach Please video tour"
+					loading="lazy"
+					referrerpolicy="strict-origin-when-cross-origin"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+			</div>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.eyebrow {
+		margin: 0 0 10px;
+		color: #267c82;
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.page-heading {
+		padding-block: 68px 58px;
+		background: #eaf6f2;
+		text-align: center;
+	}
+
+	h1,
+	h2 {
+		margin: 0;
+		color: #163d4b;
+		font-family: Georgia, "Times New Roman", serif;
+		font-weight: 500;
+	}
+
+	h1 {
+		font-size: clamp(3rem, 7vw, 4.8rem);
+	}
+
+	.page-heading > div > p:last-child {
+		max-width: 580px;
+		margin: 15px auto 0;
+		color: #58717a;
+		line-height: 1.7;
+	}
+
+	.gallery-content {
+		padding-top: 48px;
+	}
+
+	.photo-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.photo-card {
+		position: relative;
+		min-height: 220px;
+		overflow: hidden;
+		border-radius: 14px;
+		background: #d9e8e5;
+	}
+
+	.photo-card img {
+		width: 100%;
+		height: 100%;
+		min-height: 220px;
+		object-fit: cover;
+		transition: transform 220ms ease;
+	}
+
+	.photo-card:hover img,
+	.photo-card:focus-visible img {
+		transform: scale(1.04);
+	}
+
+	.photo-card span {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: 32px 16px 14px;
+		background: linear-gradient(transparent, rgb(7 34 46 / 78%));
+		color: white;
+		font-size: 0.93rem;
+		font-weight: 700;
+		text-transform: capitalize;
+	}
+
+	.video-card {
+		display: grid;
+		grid-template-columns: 0.75fr 1.25fr;
+		align-items: center;
+		gap: 36px;
+		margin-top: 68px;
+		padding: 36px;
+		border-radius: 20px;
+		background: #fff8ec;
+	}
+
+	.video-card h2 {
+		font-size: clamp(1.8rem, 4vw, 2.6rem);
+	}
+
+	.video-card > div:first-child > p:last-child {
+		margin: 14px 0 0;
+		color: #58717a;
+		line-height: 1.7;
+	}
+
+	.video-frame {
+		overflow: hidden;
+		aspect-ratio: 16 / 9;
+		border-radius: 12px;
+		background: #173d4d;
+	}
+
+	.video-frame iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	@media (max-width: 760px) {
+		.photo-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.photo-card,
+		.photo-card img {
+			min-height: 190px;
+		}
+
+		.video-card {
+			grid-template-columns: 1fr;
+			gap: 20px;
+			margin-top: 44px;
+			padding: 24px;
+		}
+	}
+
+	@media (max-width: 440px) {
+		.photo-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

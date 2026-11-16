@@ -1,0 +1,315 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	activePage?: string;
+}
+
+const { title, description, activePage = "" } = Astro.props;
+const navigation = [
+	{ label: "Home", href: "/", key: "home" },
+	{ label: "Gallery", href: "/gallery/", key: "gallery" },
+	{ label: "Book now", href: "/book-now/", key: "book-now" },
+	{ label: "Contact", href: "/contact-us/", key: "contact-us" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#123c50" />
+		<link rel="icon" type="image/png" href="/images/logo.png" />
+		<title>{title} | Beach Please</title>
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Skip to content</a>
+		<div class="contact-strip">
+			<div class="site-width contact-strip-inner">
+				<div class="contact-shortcuts">
+					<a href="mailto:beachplease7508@gmail.com">beachplease7508@gmail.com</a>
+					<a href="tel:+19193071862">919-307-1862</a>
+				</div>
+				<div class="social-links">
+					<a href="https://www.facebook.com/profile.php?id=100089334288452" target="_blank" rel="noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+					<a href="https://www.instagram.com/beachplease_topsailnc/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+				</div>
+			</div>
+		</div>
+		<header class="site-header">
+			<div class="site-width header-inner">
+				<a class="brand" href="/" aria-label="Beach Please home">
+					<img src="/images/logo.png" alt="" width="159" height="107" />
+					<span class="brand-copy">
+						<strong>Beach Please</strong>
+						<span>North Topsail Beach, North Carolina</span>
+					</span>
+				</a>
+				<nav aria-label="Main navigation">
+					{navigation.map(({ label, href, key }) => (
+						<a class:list={["nav-link", { active: activePage === key }]} href={href} aria-current={activePage === key ? "page" : undefined}>
+							{label}
+						</a>
+					))}
+				</nav>
+			</div>
+		</header>
+		<main id="main-content">
+			<slot />
+		</main>
+		<footer class="site-footer">
+			<div class="site-width footer-inner">
+				<a class="footer-brand" href="/">Beach Please</a>
+				<p>Experience the best of both worlds at North Topsail Beach.</p>
+				<div class="footer-links">
+					<a href="/gallery/">Gallery</a>
+					<a href="/book-now/">Book your stay</a>
+					<a href="/contact-us/">Contact</a>
+				</div>
+				<small>© {new Date().getFullYear()} Beach Please · North Topsail Beach, NC</small>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+		color: #183541;
+		background: #fffdf8;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		--ocean: #123c50;
+		--ocean-deep: #0c2d3d;
+		--sea-glass: #d9f1eb;
+		--sand: #fff8ec;
+		--coral: #e85c76;
+		--muted: #58717a;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0;
+		min-width: 320px;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	.site-width {
+		width: min(1120px, calc(100% - 48px));
+		margin-inline: auto;
+	}
+
+	.skip-link {
+		position: absolute;
+		z-index: 5;
+		top: 8px;
+		left: 8px;
+		padding: 10px 14px;
+		transform: translateY(-160%);
+		background: white;
+		color: var(--ocean-deep);
+	}
+
+	.skip-link:focus {
+		transform: translateY(0);
+	}
+
+	.contact-strip {
+		background: var(--ocean);
+		color: white;
+		font-size: 0.88rem;
+	}
+
+	.contact-strip-inner,
+	.contact-shortcuts,
+	.social-links {
+		display: flex;
+		align-items: center;
+	}
+
+	.contact-strip-inner {
+		min-height: 42px;
+		justify-content: space-between;
+		gap: 20px;
+	}
+
+	.contact-shortcuts,
+	.social-links {
+		gap: 24px;
+	}
+
+	.contact-strip a {
+		text-decoration: none;
+	}
+
+	.contact-strip a:hover,
+	.contact-strip a:focus-visible {
+		text-decoration: underline;
+	}
+
+	.site-header {
+		background: #fff;
+		box-shadow: 0 3px 18px rgb(18 60 80 / 8%);
+	}
+
+	.header-inner {
+		display: flex;
+		min-height: 122px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 28px;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 16px;
+		text-decoration: none;
+	}
+
+	.brand img {
+		width: 106px;
+		height: 72px;
+		object-fit: contain;
+	}
+
+	.brand-copy {
+		display: grid;
+		gap: 4px;
+	}
+
+	.brand-copy strong,
+	.footer-brand {
+		color: var(--ocean);
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: 1.5rem;
+	}
+
+	.brand-copy span {
+		color: var(--muted);
+		font-size: 0.83rem;
+	}
+
+	nav,
+	.footer-links {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.nav-link {
+		padding: 11px 15px;
+		border-radius: 999px;
+		color: var(--ocean-deep);
+		font-weight: 700;
+		text-decoration: none;
+		transition: background-color 160ms ease, color 160ms ease;
+	}
+
+	.nav-link:hover,
+	.nav-link:focus-visible,
+	.nav-link.active {
+		background: var(--sea-glass);
+		color: var(--ocean-deep);
+	}
+
+	.site-footer {
+		margin-top: 80px;
+		background: var(--ocean-deep);
+		color: white;
+	}
+
+	.footer-inner {
+		display: grid;
+		justify-items: center;
+		gap: 16px;
+		padding-block: 42px;
+		text-align: center;
+	}
+
+	.footer-brand {
+		color: white;
+		text-decoration: none;
+	}
+
+	.footer-inner p {
+		margin: 0;
+		color: #d2e3e8;
+	}
+
+	.footer-links {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 22px;
+	}
+
+	.footer-links a {
+		color: white;
+		text-decoration-color: rgb(255 255 255 / 45%);
+		text-underline-offset: 4px;
+	}
+
+	.footer-inner small {
+		color: #b7cbd2;
+	}
+
+	@media (max-width: 760px) {
+		.site-width {
+			width: min(100% - 32px, 560px);
+		}
+
+		.contact-strip-inner {
+			padding-block: 9px;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 8px 18px;
+		}
+
+		.contact-shortcuts,
+		.social-links {
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 8px 18px;
+		}
+
+		.header-inner {
+			padding-block: 12px 18px;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.brand img {
+			width: 80px;
+			height: 55px;
+		}
+
+		.brand-copy strong {
+			font-size: 1.25rem;
+		}
+
+		nav {
+			width: 100%;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 2px;
+		}
+
+		.nav-link {
+			padding: 9px 11px;
+			font-size: 0.92rem;
+		}
+	}
+</style>

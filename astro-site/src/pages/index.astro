@@ -1,0 +1,322 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const highlights = [
+	{
+		image: "/images/home/living-room.png",
+		alt: "Bright living room with comfortable seating",
+		title: "A place to settle in",
+		text: "Come in to a bright, airy living space with comfortable furnishings and plenty of natural light. The fully equipped kitchen has the essentials for easy meals together.",
+	},
+	{
+		image: "/images/home/exterior.jpg",
+		alt: "The Beach Please home in North Topsail Beach",
+		title: "A coastal home base",
+		text: "Enjoy a relaxed stay in beautiful North Topsail Beach, with room for family and friends and the coast close by.",
+	},
+	{
+		image: "/images/home/bedroom.jpg",
+		alt: "One of the home's spacious bedrooms",
+		title: "Room for everyone",
+		text: "Four spacious bedrooms offer comfortable beds and ample storage. Each bedroom has its own TV, and two full bathrooms make group stays easy.",
+	},
+	{
+		image: "/images/home/upstairs-living.jpg",
+		alt: "Upstairs living space with room to relax",
+		title: "Make time for fun",
+		text: "The upstairs living room is ready for games, movie nights, and slow afternoons, with a foosball table, a daybed, and a large flat-screen TV.",
+	},
+	{
+		image: "/images/home/sound-view.jpg",
+		alt: "View across the water from the upper deck",
+		title: "Take in the views",
+		text: "Step onto the deck for ocean breezes and beautiful water views. When it is time for the beach, grab the provided chairs, umbrellas, and toys.",
+	},
+	{
+		image: "/images/home/balcony.jpg",
+		alt: "Coastal view from the home's balcony",
+		title: "Slow down on the deck",
+		text: "Enjoy a morning coffee, watch the sky change, or unwind in the sea breeze on the home's oceanfront balcony.",
+	},
+];
+---
+
+<SiteLayout
+	title="Welcome to Beach Please"
+	description="A spacious oceanfront vacation rental in North Topsail Beach, North Carolina, with four bedrooms, a beach-view deck, and room for the whole family."
+	activePage="home"
+>
+	<section class="hero">
+		<img class="hero-image" src="/images/gallery/29-House-Front.jpg" alt="Beach Please vacation home in North Topsail Beach" fetchpriority="high" />
+		<div class="hero-shade"></div>
+		<div class="hero-copy site-width">
+			<p class="eyebrow">North Topsail Beach, North Carolina</p>
+			<h1>Welcome to <span>Beach Please</span></h1>
+			<p>Experience the best of both worlds with stunning beach and sound views.</p>
+			<a class="button button-coral" href="/book-now/">Plan your beach escape <span aria-hidden="true">→</span></a>
+		</div>
+	</section>
+
+	<section class="intro site-width">
+		<div class="intro-mark" aria-hidden="true">☼</div>
+		<p class="eyebrow">Your coastal getaway</p>
+		<h2>Make yourself at home by the water</h2>
+		<p class="intro-text">
+			Welcome to our short-term rental in beautiful North Topsail Beach. With room for family and friends, a relaxed coastal setting, and the beach just a short walk away, it is a lovely place to slow down and make memories.
+		</p>
+	</section>
+
+	<section class="highlights site-width" aria-label="About the home">
+		{highlights.map((highlight, index) => (
+			<article class:list={["highlight", { reverse: index % 2 === 1 }]}>
+				<img src={highlight.image} alt={highlight.alt} loading="lazy" />
+				<div class="highlight-copy">
+					<p class="eyebrow">Beach Please</p>
+					<h2>{highlight.title}</h2>
+					<p>{highlight.text}</p>
+				</div>
+			</article>
+		))}
+	</section>
+
+	<section class="home-cta">
+		<div class="site-width cta-inner">
+			<div>
+				<p class="eyebrow">Your next beach trip starts here</p>
+				<h2>Ready to make yourself at home?</h2>
+			</div>
+			<a class="button button-light" href="/book-now/">Explore booking options <span aria-hidden="true">→</span></a>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.hero {
+		position: relative;
+		display: grid;
+		min-height: min(620px, 72vw);
+		min-height: min(620px, 72svh);
+		overflow: hidden;
+		align-items: center;
+		background: #356477;
+		color: white;
+	}
+
+	.hero-image,
+	.hero-shade {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.hero-image {
+		object-fit: cover;
+		object-position: center 57%;
+	}
+
+	.hero-shade {
+		background: linear-gradient(90deg, rgb(9 39 52 / 78%), rgb(9 39 52 / 12%));
+	}
+
+	.hero-copy {
+		position: relative;
+		padding-block: 80px;
+	}
+
+	.eyebrow {
+		margin: 0 0 12px;
+		color: #267c82;
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.hero .eyebrow {
+		color: #baf0e4;
+	}
+
+	h1,
+	h2 {
+		font-family: Georgia, "Times New Roman", serif;
+		font-weight: 500;
+	}
+
+	h1 {
+		max-width: 1080px;
+		margin: 0;
+		font-size: clamp(3rem, 6vw, 5.4rem);
+		line-height: 1.03;
+	}
+
+	h1 span {
+		color: #ffd2d9;
+	}
+
+	.hero-copy > p:not(.eyebrow) {
+		max-width: 540px;
+		margin: 22px 0 30px;
+		font-size: clamp(1.05rem, 2vw, 1.25rem);
+		line-height: 1.65;
+	}
+
+	.button {
+		display: inline-flex;
+		min-height: 48px;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding: 12px 21px;
+		border: 0;
+		border-radius: 999px;
+		font-weight: 800;
+		text-decoration: none;
+		transition: transform 160ms ease, box-shadow 160ms ease;
+	}
+
+	.button:hover,
+	.button:focus-visible {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgb(0 0 0 / 16%);
+	}
+
+	.button-coral {
+		background: #ef7285;
+		color: #292b2d;
+	}
+
+	.intro {
+		max-width: 800px;
+		padding-block: 86px 74px;
+		text-align: center;
+	}
+
+	.intro-mark {
+		margin-bottom: 4px;
+		color: #e89c67;
+		font-size: 2.3rem;
+	}
+
+	.intro h2,
+	.highlight h2,
+	.home-cta h2 {
+		margin: 0;
+		color: #163d4b;
+		font-size: clamp(2rem, 4vw, 3.2rem);
+		line-height: 1.14;
+	}
+
+	.intro-text {
+		max-width: 690px;
+		margin: 20px auto 0;
+		color: #56707a;
+		font-size: 1.08rem;
+		line-height: 1.8;
+	}
+
+	.highlights {
+		display: grid;
+		gap: 38px;
+		padding-bottom: 82px;
+	}
+
+	.highlight {
+		display: grid;
+		min-height: 340px;
+		grid-template-columns: 1.05fr 0.95fr;
+		overflow: hidden;
+		align-items: center;
+		border-radius: 20px;
+		background: white;
+		box-shadow: 0 12px 36px rgb(18 60 80 / 8%);
+	}
+
+	.highlight.reverse img {
+		order: 2;
+	}
+
+	.highlight img {
+		width: 100%;
+		height: 100%;
+		min-height: 340px;
+		object-fit: cover;
+	}
+
+	.highlight-copy {
+		padding: clamp(28px, 5vw, 62px);
+	}
+
+	.highlight h2 {
+		font-size: clamp(1.8rem, 3vw, 2.7rem);
+	}
+
+	.highlight-copy > p:last-child {
+		margin: 16px 0 0;
+		color: #58717a;
+		line-height: 1.8;
+	}
+
+	.home-cta {
+		padding-block: 52px;
+		background: #d9f1eb;
+	}
+
+	.cta-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 28px;
+	}
+
+	.home-cta h2 {
+		font-size: clamp(1.9rem, 4vw, 2.7rem);
+	}
+
+	.button-light {
+		flex: 0 0 auto;
+		background: #123c50;
+		color: white;
+	}
+
+	@media (max-width: 700px) {
+		.hero {
+			min-height: 580px;
+		}
+
+		.hero-shade {
+			background: linear-gradient(90deg, rgb(9 39 52 / 76%), rgb(9 39 52 / 27%));
+		}
+
+		.intro {
+			padding-block: 62px 52px;
+		}
+
+		.highlights {
+			gap: 22px;
+			padding-bottom: 56px;
+		}
+
+		.highlight {
+			grid-template-columns: 1fr;
+		}
+
+		.highlight.reverse img {
+			order: initial;
+		}
+
+		.highlight img {
+			height: 245px;
+			min-height: 0;
+		}
+
+		.highlight-copy {
+			padding: 28px;
+		}
+
+		.cta-inner {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+	}
+</style>

@@ -1,0 +1,178 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+	title="Contact Us"
+	description="Get in touch with Beach Please about your North Topsail Beach stay."
+	activePage="contact-us"
+>
+	<section class="page-heading">
+		<div class="site-width">
+			<p class="eyebrow">We're happy to help</p>
+			<h1>Contact us</h1>
+			<p>Questions about Beach Please? Reach out by email, phone, or social media.</p>
+		</div>
+	</section>
+
+	<section class="site-width contact-section">
+		<div class="contact-grid">
+			<a class="contact-card" href="mailto:beachplease7508@gmail.com">
+				<span class="contact-icon" aria-hidden="true">✉</span>
+				<p class="eyebrow">Email us</p>
+				<h2>Send a note</h2>
+				<span>beachplease7508@gmail.com</span>
+				<span class="contact-action">Write an email <span aria-hidden="true">→</span></span>
+			</a>
+			<a class="contact-card" href="tel:+19193071862">
+				<span class="contact-icon" aria-hidden="true">☎</span>
+				<p class="eyebrow">Call or text</p>
+				<h2>Let's talk</h2>
+				<span>919-307-1862</span>
+				<span class="contact-action">Call or text <span aria-hidden="true">→</span></span>
+			</a>
+		</div>
+		<div class="social-note">
+			<h2>Connect with us</h2>
+			<p>Follow Beach Please on Facebook and Instagram for updates and a little more coastal inspiration.</p>
+			<div class="social-buttons">
+				<a href="https://www.facebook.com/profile.php?id=100089334288452" target="_blank" rel="noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+				<a href="https://www.instagram.com/beachplease_topsailnc/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+			</div>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.eyebrow {
+		margin: 0 0 10px;
+		color: #267c82;
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.page-heading {
+		padding-block: 68px 58px;
+		background: #eaf6f2;
+		text-align: center;
+	}
+
+	h1,
+	h2 {
+		margin: 0;
+		color: #163d4b;
+		font-family: Georgia, "Times New Roman", serif;
+		font-weight: 500;
+	}
+
+	h1 {
+		font-size: clamp(3rem, 7vw, 4.8rem);
+	}
+
+	.page-heading > div > p:last-child {
+		max-width: 580px;
+		margin: 15px auto 0;
+		color: #58717a;
+		line-height: 1.7;
+	}
+
+	.contact-section {
+		padding-top: 52px;
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 22px;
+	}
+
+	.contact-card {
+		display: grid;
+		justify-items: center;
+		padding: 36px 26px;
+		border: 1px solid #e1ebe8;
+		border-radius: 18px;
+		background: white;
+		box-shadow: 0 10px 28px rgb(18 60 80 / 7%);
+		text-align: center;
+		text-decoration: none;
+		transition: transform 180ms ease, box-shadow 180ms ease;
+	}
+
+	.contact-card:hover,
+	.contact-card:focus-visible {
+		transform: translateY(-4px);
+		box-shadow: 0 16px 32px rgb(18 60 80 / 13%);
+	}
+
+	.contact-icon {
+		display: grid;
+		width: 58px;
+		height: 58px;
+		place-items: center;
+		margin-bottom: 18px;
+		border-radius: 50%;
+		background: #d9f1eb;
+		color: #123c50;
+		font-size: 1.6rem;
+	}
+
+	.contact-card h2,
+	.social-note h2 {
+		font-size: 1.8rem;
+	}
+
+	.contact-card > span:not(.contact-icon, .contact-action) {
+		margin-top: 12px;
+		color: #58717a;
+	}
+
+	.contact-action {
+		margin-top: 20px;
+		color: #176275;
+		font-weight: 800;
+	}
+
+	.social-note {
+		margin-top: 36px;
+		padding: 34px;
+		border-radius: 18px;
+		background: #fff8ec;
+		text-align: center;
+	}
+
+	.social-note > p {
+		max-width: 620px;
+		margin: 12px auto 20px;
+		color: #58717a;
+		line-height: 1.7;
+	}
+
+	.social-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px;
+	}
+
+	.social-buttons a {
+		padding: 12px 17px;
+		border-radius: 999px;
+		background: #123c50;
+		color: white;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	@media (max-width: 640px) {
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.social-note {
+			padding: 26px 20px;
+		}
+	}
+</style>

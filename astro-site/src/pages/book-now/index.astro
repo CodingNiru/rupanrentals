@@ -1,0 +1,215 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const bookingOptions = [
+	{
+		name: "Book direct",
+		image: "/images/booking/sol-searching.png",
+		href: "https://solsearchingproperties.com/beach-please/",
+		description: "Book Beach Please directly with Sol Searching Properties.",
+	},
+	{
+		name: "Book on Vrbo",
+		image: "/images/booking/vrbo.webp",
+		href: "https://vrbo.onelink.me/ItNz/zf75e0q5",
+		description: "View Beach Please on Vrbo.",
+	},
+	{
+		name: "Book on Airbnb",
+		image: "/images/booking/airbnb.png",
+		href: "https://www.airbnb.com/rooms/1524616373207688190",
+		description: "View Beach Please on Airbnb.",
+	},
+];
+---
+
+<SiteLayout
+	title="Book Now"
+	description="Choose a booking option for Beach Please in North Topsail Beach."
+	activePage="book-now"
+>
+	<section class="page-heading">
+		<div class="site-width">
+			<p class="eyebrow">Your beach getaway is waiting</p>
+			<h1>Book your stay</h1>
+			<p>Choose the option that works best for you. Booking takes place securely on the provider's website.</p>
+		</div>
+	</section>
+
+	<section class="site-width booking-section">
+		<div class="booking-grid">
+			{bookingOptions.map((option, index) => (
+				<a class:list={["booking-card", { featured: index === 0 }]} href={option.href} target="_blank" rel="noreferrer">
+					<div class="booking-logo">
+						<img src={option.image} alt="" loading="lazy" />
+					</div>
+					<h2>{option.name}</h2>
+					<p>{option.description}</p>
+					<span class="booking-link">Visit booking site <span aria-hidden="true">↗</span></span>
+				</a>
+			))}
+		</div>
+
+		<div class="social-card">
+			<div>
+				<p class="eyebrow">Keep in touch</p>
+				<h2>Follow along on social media</h2>
+			</div>
+			<div class="social-buttons">
+				<a href="https://www.facebook.com/profile.php?id=100089334288452" target="_blank" rel="noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+				<a href="https://www.instagram.com/beachplease_topsailnc/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+			</div>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.eyebrow {
+		margin: 0 0 10px;
+		color: #267c82;
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.page-heading {
+		padding-block: 68px 58px;
+		background: #eaf6f2;
+		text-align: center;
+	}
+
+	h1,
+	h2 {
+		margin: 0;
+		color: #163d4b;
+		font-family: Georgia, "Times New Roman", serif;
+		font-weight: 500;
+	}
+
+	h1 {
+		font-size: clamp(3rem, 7vw, 4.8rem);
+	}
+
+	.page-heading > div > p:last-child {
+		max-width: 580px;
+		margin: 15px auto 0;
+		color: #58717a;
+		line-height: 1.7;
+	}
+
+	.booking-section {
+		padding-top: 52px;
+	}
+
+	.booking-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 20px;
+	}
+
+	.booking-card {
+		display: grid;
+		min-height: 320px;
+		align-content: start;
+		justify-items: center;
+		padding: 27px 24px;
+		border: 1px solid #e1ebe8;
+		border-radius: 18px;
+		background: white;
+		box-shadow: 0 10px 28px rgb(18 60 80 / 7%);
+		text-align: center;
+		text-decoration: none;
+		transition: transform 180ms ease, box-shadow 180ms ease;
+	}
+
+	.booking-card:hover,
+	.booking-card:focus-visible {
+		transform: translateY(-4px);
+		box-shadow: 0 16px 32px rgb(18 60 80 / 13%);
+	}
+
+	.booking-card.featured {
+		border-color: #b9ded5;
+		background: #f1faf6;
+	}
+
+	.booking-logo {
+		display: grid;
+		width: 100%;
+		height: 150px;
+		align-items: center;
+		justify-items: center;
+		margin-bottom: 12px;
+	}
+
+	.booking-logo img {
+		max-width: 200px;
+		max-height: 140px;
+		object-fit: contain;
+	}
+
+	.booking-card h2 {
+		font-size: 1.55rem;
+	}
+
+	.booking-card > p {
+		margin: 10px 0 16px;
+		color: #58717a;
+		line-height: 1.6;
+	}
+
+	.booking-link {
+		margin-top: auto;
+		color: #176275;
+		font-weight: 800;
+	}
+
+	.social-card {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		margin-top: 38px;
+		padding: 30px 34px;
+		border-radius: 18px;
+		background: #fff8ec;
+	}
+
+	.social-card h2 {
+		font-size: clamp(1.5rem, 3vw, 2rem);
+	}
+
+	.social-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.social-buttons a {
+		padding: 12px 17px;
+		border-radius: 999px;
+		background: #123c50;
+		color: white;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	@media (max-width: 760px) {
+		.booking-grid {
+			grid-template-columns: 1fr;
+			max-width: 460px;
+			margin-inline: auto;
+		}
+
+		.booking-card {
+			min-height: 280px;
+		}
+
+		.social-card {
+			align-items: flex-start;
+			flex-direction: column;
+			padding: 26px;
+		}
+	}
+</style>
